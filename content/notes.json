@@ -1,0 +1,85 @@
+{
+  "label": "Rayina’s note",
+  "items": {
+    "good-will-hunting": {
+      "rating": 10,
+      "note": "This is the food for your soul."
+    },
+    "the-perks-of-being-a-wallflower": {
+      "rating": 9,
+      "note": "I felt infinite."
+    },
+    "chungking-express": {
+      "rating": 9,
+      "note": "Since when you like loud music?"
+    },
+    "resident-evil": {
+      "rating": 7,
+      "note": "Watching bryan is pure backseat gaming feeling."
+    },
+    "dead-poets-society": {
+      "rating": 10,
+      "note": "Carpe diem. I’d stand on the desk too."
+    },
+    "other-mommy": {
+      "rating": 2,
+      "note": "The only scary thing here is how bad it is."
+    },
+    "the-truman-show": {
+      "rating": 10,
+      "note": "If my life is a simulation, then who's the director?."
+    },
+    "breakfast-at-tiffanys": {
+      "rating": 8,
+      "note": "People belong to each other."
+    },
+    "12-angry-men": {
+      "rating": 10,
+      "note": "The thing is, they don't know."
+    },
+    "the-night-is-short-walk-on-girl": {
+      "rating": 9,
+      "note": "I can see her as this."
+    },
+    "clair-obscur-expedition-33": {
+      "rating": 10,
+      "note": "Goated ost."
+    },
+    "dark-souls": {
+      "rating": 10,
+      "note": "This is where it all began, cult classic."
+    },
+    "dark-souls-iii": {
+      "rating": 9,
+      "note": "Firekeeper man.. dem."
+    },
+    "elden-ring": {
+      "rating": 10,
+      "note": "Put these foolish ambition to rest."
+    },
+    "sekiro-shadows-die-twice": {
+      "rating": 10,
+      "note": "Hesitation is defeat."
+    },
+    "lies-of-p": {
+      "rating": 8,
+      "note": "Kinda meh."
+    },
+    "persona-5-royal": {
+      "rating": 10,
+      "note": "they said it's good but idk."
+    },
+    "kingdom-come-deliverance": {
+      "rating": 8,
+      "note": "I don't think I'd do better than henry tho."
+    },
+    "the-elder-scrolls-v-skyrim": {
+      "rating": 10,
+      "note": "BEST GAME EVER."
+    },
+    "valorant": {
+      "rating": 2,
+      "note": "One more game. Always one more game."
+    }
+  }
+}

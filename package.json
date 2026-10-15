@@ -1,0 +1,16 @@
+{
+  "name": "re-casette-scroll",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A WebGL disc carousel for a personal media shelf — 20 discs on one curved ribbon.",
+  "scripts": {
+    "serve": "node tools/serve.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "verify": "node tools/verify.mjs"
+  },
+  "dependencies": {
+    "gsap": "^3.13.0",
+    "three": "^0.180.0"
+  }
+}

@@ -1,0 +1,6 @@
+{"viewport":[1080,1920],"settle_ms":7500,"preroll_ms":900,"tail_ms":1200,
+ "cases":[
+  {"name":"glide","url":"http://localhost:4173/","drive":[{"wheel":{"n":6,"dy":260,"gap_ms":220}},{"wait":900}]},
+  {"name":"hover","url":"http://localhost:4173/","prep":[{"wheel":{"n":6,"dy":260,"gap_ms":220}},{"wait":1400}],"drive":[{"sweep":[[250,980],[560,900],[860,1000],[540,960]],"dur":1.6}]},
+  {"name":"switch","url":"http://localhost:4173/","prep":[{"wheel":{"n":6,"dy":260,"gap_ms":220}},{"wait":1400}],"drive":[{"click_text":"Games"},{"wait":1200}]}
+ ]}

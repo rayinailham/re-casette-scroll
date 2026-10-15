@@ -1,0 +1,57 @@
+/* Preloader. motion-spec.md §2.5, design-system.md §3.
+ *
+ * NO background. The loader is a transparent layer over the canvas: the lead
+ * disc rises, turns and grows UNDER the counter, and the counter orbits it. An
+ * opaque loader hides the one thing the intro exists to show. */
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  color: var(--_theme---body-text);
+}
+
+.preloader__count {
+  left: 0;
+  right: 0;
+  top: var(--_layout---container--container-padding, .5em);
+  font-family: var(--_font---serif);
+  font-size: var(--size--96px);
+  letter-spacing: -.04em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;   /* mandatory: a proportional odometer jitters */
+  will-change: transform;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: absolute;
+}
+
+.preloader__cell   { flex: none; height: 1em; display: block; overflow: hidden; }
+.preloader__shell  { will-change: transform; height: 1em; display: block; overflow: hidden; }
+.preloader__drum   { white-space: pre; will-change: transform; line-height: 1; display: block; }
+.preloader__glyph  { will-change: transform; line-height: 1; display: block; }
+
+.preloader__side {
+  white-space: nowrap;
+  will-change: transform;
+  flex-direction: column;
+  display: flex;
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  font-size: var(--size--18px);
+}
+.preloader__side--left  { left:  var(--_layout---container--container-padding, .5em); text-align: left;  align-items: flex-start; }
+.preloader__side--right { right: var(--_layout---container--container-padding, .5em); text-align: right; align-items: flex-end; }
+.preloader__side-line   { display: block; overflow: hidden; }   /* the labels roll in/out of this */
+.preloader__side-inner  { will-change: transform; line-height: 1; display: block; }
+
+.preloader__years { display: flex; font-variant-numeric: tabular-nums; line-height: 1; }
+.preloader__years .preloader__cell { height: 1em; }
+
+@media (max-width: 767px) {
+  .preloader__side { display: none; }
+}

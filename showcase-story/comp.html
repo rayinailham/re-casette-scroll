@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>RE:casette-scroll · story</title>
+<style>
+@font-face{font-family:'Serif';src:url(fonts/instrument-serif-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Sans';src:url(fonts/inter-tight-latin-500-normal.woff2) format('woff2')}
+:root{--bg:#eeeeee;--ink:#111}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:var(--bg)}
+#world{position:absolute;left:0;top:0;width:1080px;height:1920px;transform-origin:0 0;will-change:transform}
+#world img{position:absolute;left:0;top:0;width:1080px;height:1920px;display:block;opacity:0}
+.band{position:absolute;left:0;width:1080px;background:var(--bg);opacity:0}
+#bt{top:0;height:330px;background:linear-gradient(var(--bg) 78%,rgba(238,238,238,0))}
+#bb{top:1590px;height:330px;background:linear-gradient(rgba(238,238,238,0),var(--bg) 22%)}
+#title{position:absolute;left:0;width:1080px;top:395px;text-align:center;font:400 184px/1 'Serif',Georgia,serif;letter-spacing:-.01em;color:var(--ink);white-space:nowrap}
+#title span{display:inline-block;transform-origin:50% 90%}
+#sub{position:absolute;left:0;width:1080px;top:1400px;text-align:center;font:500 46px/1.2 'Sans',system-ui,sans-serif;color:var(--ink);letter-spacing:.01em}
+#by{position:absolute;left:0;width:1080px;top:1478px;text-align:center;font:500 28px/1 'Sans',system-ui,sans-serif;color:#7a7a7a;letter-spacing:.14em;text-transform:uppercase}
+#cursor{position:absolute;left:0;top:0;width:60px;height:86px;opacity:0;will-change:transform;transform-origin:5px 4px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.28))}
+#hud{position:absolute;left:8px;top:8px;font:20px monospace;color:#c00;display:none}
+</style></head><body>
+<div id="world"></div>
+<div class="band" id="bt"></div><div class="band" id="bb"></div>
+<div id="title"></div><div id="sub">Ten films. Ten games. One shelf.</div><div id="by">Rayina Ilham</div>
+<svg id="cursor" viewBox="0 0 24 34"><path d="M2 2 L2 27 L8.5 21.5 L13 31.5 L17 29.7 L12.6 20 L21 20 Z" fill="#111" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg>
+<div id="hud"></div>
+<script src="motion.js"></script>
+<script>
+const {clamp, lerp, sstep, ssstep, spline} = OM;
+const W = 1080, H = 1920, FPS = 30, DUR = 14.0, FR = 'footage/frames/';
+const INFO = {glide:{n:390,mark:256}, hover:{n:457,mark:355}, switch:{n:446,mark:353}, loader:{n:236,mark:196,first:83}};
+const $ = id => document.getElementById(id);
+
+// ── one picture: the disc stays where the camera is, the takes change around it ──
+const gm = INFO.glide.mark, hm = INFO.hover.mark, sm = INFO.switch.mark;
+const T_CLICK = 9.3;                                   // the click lands, the switch footage starts to play
+const NOTCH0 = 3.1 + 6 / FPS, NOTCH = i => NOTCH0 + i * 0.22;   // wheel notches in glide footage time
+const SWEEP0 = 6.1 + 8 / FPS;                          // hover sweep starts in footage time
+// segment: footage take, comp window [t0,t1], frame at t, dissolve-in length
+const SEGS = [
+  { name: 'loader', t0: 0.0,  t1: 3.4,  fade: 0,    f: t => 92 + t * FPS },
+  { name: 'glide',  t0: 3.1,  t1: 6.35, fade: 0.28, f: t => gm - 6 + (t - 3.1) * FPS },
+  { name: 'hover',  t0: 6.1,  t1: 8.6,  fade: 0.2,  f: t => hm - 8 + (t - 6.1) * FPS },
+  { name: 'switch', t0: 8.35, t1: DUR,  fade: 0.2,  f: t => t < T_CLICK ? sm - 3 : sm + (t - T_CLICK) * FPS },
+];
+SEGS.forEach(s => {
+  s.img = document.createElement('img'); $('world').append(s.img); s.cur = '';
+});
+
+// ── camera: keyed on the active disc, 0.1 s ahead, sineInOut; whips use expoInOut ──
+const KEYS = [
+  { t: 0.0,  x: 540, y: 1075, zoom: 1.75 },
+  { t: 3.2,  x: 540, y: 965,  zoom: 1.30, curve: OM.ease.sineInOut },
+  { t: 4.2,  x: 548, y: 958,  zoom: 1.22, curve: OM.ease.sineInOut },
+  { t: 5.6,  x: 540, y: 960,  zoom: 1.30, curve: OM.ease.sineInOut },
+  { t: 6.3,  x: 540, y: 960,  zoom: 1.52, curve: OM.ease.sineInOut },
+  { t: 6.95, x: 470, y: 962,  zoom: 1.52, curve: OM.ease.sineInOut },
+  { t: 7.55, x: 590, y: 950,  zoom: 1.52, curve: OM.ease.sineInOut },
+  { t: 8.3,  x: 540, y: 960,  zoom: 1.40, curve: OM.ease.sineInOut },
+  { t: 8.55, x: 540, y: 960,  zoom: 1.40 },
+  { t: 9.05, x: 596, y: 58,   zoom: 2.25, curve: OM.ease.expoInOut },   // whip up to the switch
+  { t: 9.55, x: 596, y: 58,   zoom: 2.25 },
+  { t: 10.0, x: 540, y: 960,  zoom: 1.32, curve: OM.ease.expoInOut },   // whip back to the flip
+  { t: 11.0, x: 540, y: 960,  zoom: 1.36, curve: OM.ease.sineInOut },   // lockup: camera lands and stays
+];
+const HITS = [[10.12, 9, 10], [11.25, 5, 10]];          // [t, amp, decay]
+const handEnv = t => sstep(0.2, 0.7, t) * (1 - sstep(5.6, 6.0, t));  // zero in the lockup
+function camAt(t) {
+  const c = OM.camera(t, KEYS, { W, H }), e = handEnv(t) * 5;
+  let x = c.x + e * (Math.sin(1.7 * t) + 0.6 * Math.sin(2.9 * t + 1)) / c.zoom;
+  let y = c.y + e * (Math.sin(1.3 * t + 2) + 0.5 * Math.sin(3.3 * t)) / c.zoom;
+  let rot = c.rot;
+  for (const [th, amp, decay] of HITS) { const s = OM.shake(t, th, { amp, decay, seed: Math.round(th * 100) }); x += s.x / c.zoom; y += s.y / c.zoom; rot += s.rot; }
+  return { x, y, zoom: c.zoom, rot };
+}
+
+// ── the hand: what actually drove the page, in footage pixels ──
+const ss = u => { u = clamp(u); return u * u * (3 - 2 * u); };
+const SWEEP = [[250, 980], [560, 900], [860, 1000], [540, 960]];
+function handAt(t) {
+  const C = [540, 960];
+  if (t < SWEEP0 - 0.15) return C;
+  if (t < SWEEP0) { const k = ss((t - (SWEEP0 - 0.15)) / 0.15); return [lerp(C[0], SWEEP[0][0], k), lerp(C[1], SWEEP[0][1], k)]; }
+  const per = 1.6 / 3, u = (t - SWEEP0) / per, i = Math.min(2, Math.floor(u));
+  if (t < SWEEP0 + 1.6) { const k = ss(u - i); return [lerp(SWEEP[i][0], SWEEP[i + 1][0], k), lerp(SWEEP[i][1], SWEEP[i + 1][1], k)]; }
+  if (t < 8.55) return SWEEP[3];
+  const k = OM.ease.sineInOut(clamp((t - 8.55) / 0.6));   // up to the Games button
+  return [lerp(SWEEP[3][0], 609, k), lerp(SWEEP[3][1], 17, k)];
+}
+const CLICKS = [0, 1, 2, 3, 4, 5].map(NOTCH).concat([T_CLICK]);
+const cursorOp = t => sstep(3.0, 3.35, t) * (1 - sstep(9.8, 10.2, t));
+
+// ── seek ──
+const worldTop = (cam) => OM.view(cam, { W, H });
+function seek(t) {
+  const pending = [];
+  SEGS.forEach((s, i) => {
+    const on = t >= s.t0 - 1e-6 && t <= s.t1 + 1e-6, f = clamp(Math.round(s.f(t)), (INFO[s.name].first ?? 0), INFO[s.name].n - 1);
+    let op = 0;
+    if (on) op = i === 0 ? 1 : s.fade ? ssstep(s.t0, s.t0 + s.fade, t) : 1;
+    s.img.style.opacity = op;
+    if (on) { const src = `${FR}${s.name}/${String(f + 1).padStart(4, '0')}.jpg`; if (s.cur !== src) { s.cur = src; s.img.src = src; pending.push(s.img.decode().catch(() => {})); } }
+  });
+  const cam = camAt(t), M = worldTop(cam);
+  $('world').style.transform = `matrix(${M.map(v => v.toFixed(5)).join(',')})`;
+  // hand — drawn in screen space at the world point, constant size
+  const h = handAt(t), p = OM.project(M, h[0], h[1]), cu = { s: CLICKS.some(c => t - c >= 0 && t - c < 0.14) ? 0.84 : 1 };
+  $('cursor').style.opacity = cursorOp(t);
+  $('cursor').style.transform = `translate(${(p[0] - 5).toFixed(1)}px,${(p[1] - 4).toFixed(1)}px) scale(${(1.15 * cu.s).toFixed(3)})`;
+  // lockup: the page's own UI recedes, the type lands around the disc
+  const b = sstep(10.9, 11.4, t); $('bt').style.opacity = b; $('bb').style.opacity = b;
+  const L = [...$('title').children];
+  L.forEach((c, k) => { const d = OM.letterDrop(t, 11.25, k, { stagger: 0.045, dist: 60 }); c.style.opacity = d.op; c.style.transform = `translateY(${d.y.toFixed(1)}px) scale(${(1 + d.sq * 0.6).toFixed(4)},${(1 - d.sq).toFixed(4)})`; });
+  const sw = OM.wordRise(t, 11.75, { dist: 22 }), by = OM.wordRise(t, 12.0, { dist: 16 });
+  $('sub').style.opacity = sw.op; $('sub').style.transform = `translateY(${sw.y.toFixed(1)}px)`;
+  $('by').style.opacity = by.op * 0.9; $('by').style.transform = `translateY(${by.y.toFixed(1)}px)`;
+  $('hud').textContent = 't=' + t.toFixed(3);
+  return Promise.all(pending);
+}
+// ── contract ──
+const DISC = { x: 372, y: 790, w: 336, h: 340 }, NAV = { x: 548, y: 4, w: 120, h: 28 };
+window.__meta = { dur: DUR, fps: FPS, inFrame: { disc: [0.3, 8.3], discBack: [10.1, DUR], nav: [9.05, 9.5] } };
+window.__track = t => {
+  const M = worldTop(camAt(t)), h = handAt(t), p = OM.project(M, h[0], h[1]);
+  const d = OM.projectBox(M, { ...DISC, op: 1 });
+  return { disc: d, discBack: d, nav: OM.projectBox(M, { ...NAV, op: t > 9 && t < 9.6 ? 1 : 0 }), hand: [p[0], p[1]] };
+};
+window.__motion = (t0, t1) => {
+  const a = camAt(t0), b = camAt(t1), m = camAt((t0 + t1) / 2);
+  let d = OM.screenTravel(a, b, m, { W, H });
+  const pa = OM.project(worldTop(a), ...handAt(t0)), pb = OM.project(worldTop(b), ...handAt(t1));
+  d = Math.max(d, Math.hypot(pa[0] - pb[0], pa[1] - pb[1]));
+  const footageMoves = (t1 > 3.3 && t0 < 6.2) || (t1 > 6.4 && t0 < 8.0) || (t1 > 9.3 && t0 < 11.3);
+  return footageMoves ? Math.max(d, 14) : d;
+};
+window.__events = () => [...[0, 1, 2, 3, 4, 5].map(i => ({ t: NOTCH(i), kind: 'notch' })), { t: SWEEP0, kind: 'hover' }, { t: T_CLICK, kind: 'click' }, { t: 10.12, kind: 'flip-land' }, { t: 11.25, kind: 'title' }];
+window.__seek = async t => { await seek(t); return true; };
+window.__ready = document.fonts.ready.then(() => {
+  $('title').innerHTML = [...'RE:CASETTE'].map(c => `<span>${c}</span>`).join('');
+  return seek(0);
+});
+const q = new URLSearchParams(location.search);
+if (q.has('t')) __ready.then(() => seek(parseFloat(q.get('t'))));
+if (q.has('hud')) $('hud').style.display = 'block';
+if (q.has('play')) __ready.then(() => { const t0 = performance.now(); (function loop() { seek(((performance.now() - t0) / 1000) % DUR); requestAnimationFrame(loop); })(); });
+</script></body></html>

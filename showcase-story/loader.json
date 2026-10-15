@@ -1,0 +1,2 @@
+{"viewport":[1080,1920],"settle_ms":6500,"preroll_ms":0,"tail_ms":300,
+ "cases":[{"name":"loader","url":"http://localhost:4173/","drive":[{"wait":200}]}]}

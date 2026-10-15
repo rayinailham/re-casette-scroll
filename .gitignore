@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.env
+TMDB_API_KEY
+assets/covers/incoming/*
+!assets/covers/incoming/.gitkeep
+
+node_modules/
+assets/stills/incoming/*
+!assets/stills/incoming/.gitkeep
+showcase-story/footage/

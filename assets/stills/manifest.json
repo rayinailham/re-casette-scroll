@@ -1,0 +1,346 @@
+{
+  "generated_by": "agy",
+  "note": "Third-party imagery for personal, non-commercial use. Do not redistribute.",
+  "stills": [
+    {
+      "id": "12-angry-men",
+      "kind": "films",
+      "title": "12 Angry Men",
+      "file": "assets/stills/12-angry-men.webp",
+      "status": "ok",
+      "source_url": "https://image.tmdb.org/t/p/original/zqWJfpKq3ooParUqAvQC7XTFcN3.jpg",
+      "source_page": "https://www.themoviedb.org/movie/389-12-angry-men/images/backdrops",
+      "provider": "TMDB",
+      "source_size": "3680x2070",
+      "licence_note": "unknown — TMDB states images are for personal use via its API terms",
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "notes": "Textless jury room table wide shot, classic high-res 3680x2070 capture, balanced mid-dark contrast suited for central caption"
+    },
+    {
+      "id": "breakfast-at-tiffanys",
+      "kind": "films",
+      "title": "Breakfast at Tiffany's",
+      "file": "assets/stills/breakfast-at-tiffanys.webp",
+      "status": "ok",
+      "source_url": "https://image.tmdb.org/t/p/original/1HMoIkfVHckgXFWrabQS7uXPF3W.jpg",
+      "source_page": "https://www.themoviedb.org/movie/164-breakfast-at-tiffany-s/images/backdrops",
+      "provider": "TMDB",
+      "source_size": "2500x1406",
+      "licence_note": "unknown — TMDB states images are for personal use via its API terms",
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "notes": "Textless film still of Audrey Hepburn as Holly Golightly; clean 2500x1406 frame, calm balanced centre"
+    },
+    {
+      "id": "dead-poets-society",
+      "kind": "films",
+      "title": "Dead Poets Society",
+      "file": "assets/stills/dead-poets-society.webp",
+      "status": "ok",
+      "source_url": "https://image.tmdb.org/t/p/original/8n9dYsTbXTykzm2Nuy7R2ftapXQ.jpg",
+      "source_page": "https://www.themoviedb.org/movie/703-dead-poets-society/images/backdrops",
+      "provider": "TMDB",
+      "source_size": "3840x2160",
+      "licence_note": "unknown — TMDB states images are for personal use via its API terms",
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "notes": "Textless 4K (3840x2160) classroom still with Robin Williams (John Keating) and students; serene lighting and balanced central composition"
+    },
+    {
+      "id": "chungking-express",
+      "kind": "films",
+      "title": "Chungking Express",
+      "file": "assets/stills/chungking-express.webp",
+      "status": "ok",
+      "source_url": "https://image.tmdb.org/t/p/original/qh1wsRzrfT16IhJLB9OhNHwi1zh.jpg",
+      "source_page": "https://www.themoviedb.org/movie/11103-chungking-express/images/backdrops",
+      "provider": "TMDB",
+      "source_size": "1920x1080",
+      "licence_note": "unknown — TMDB states images are for personal use via its API terms",
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "notes": "Iconic neon night street scene in Hong Kong; textless 1920x1080 still, moody colors, ideal central focus"
+    },
+    {
+      "id": "good-will-hunting",
+      "kind": "films",
+      "title": "Good Will Hunting",
+      "file": "assets/stills/good-will-hunting.webp",
+      "status": "ok",
+      "source_url": "https://image.tmdb.org/t/p/original/bpV8wn48s82au37QyUJ51S7X2Vf.jpg",
+      "source_page": "https://www.themoviedb.org/movie/489-good-will-hunting/images/backdrops",
+      "provider": "TMDB",
+      "source_size": "3840x2160",
+      "licence_note": "unknown — TMDB states images are for personal use via its API terms",
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "notes": "Iconic park bench conversation scene between Sean (Robin Williams) and Will (Matt Damon); textless 4K (3840x2160), calm natural backdrop"
+    },
+    {
+      "id": "the-truman-show",
+      "kind": "films",
+      "title": "The Truman Show",
+      "file": "assets/stills/the-truman-show.webp",
+      "status": "ok",
+      "source_url": "https://image.tmdb.org/t/p/original/aCHn2TXYJfzPXQKA6r9mKPbMlUB.jpg",
+      "source_page": "https://www.themoviedb.org/movie/37165-the-truman-show/images/backdrops",
+      "provider": "TMDB",
+      "source_size": "3840x2160",
+      "licence_note": "unknown — TMDB states images are for personal use via its API terms",
+      "focal": {
+        "x": 0.5,
+        "y": 0.45
+      },
+      "notes": "Truman Burbank looking out over Seahaven; textless 3840x2160 backdrop, calm mid-tones, central framing"
+    },
+    {
+      "id": "resident-evil",
+      "kind": "films",
+      "title": "Resident Evil",
+      "file": "assets/stills/resident-evil.webp",
+      "status": "ok",
+      "source_url": "https://image.tmdb.org/t/p/original/WcmrlndXAPw3a2l9VJw9hHeKOo.jpg",
+      "source_page": "https://www.themoviedb.org/movie/1576-resident-evil/images/backdrops",
+      "provider": "TMDB",
+      "source_size": "3840x2160",
+      "licence_note": "unknown — TMDB states images are for personal use via its API terms",
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "notes": "The Hive underground facility / laser corridor scene; textless 4K (3840x2160) frame without letterbox bars"
+    },
+    {
+      "id": "the-perks-of-being-a-wallflower",
+      "kind": "films",
+      "title": "The Perks of Being a Wallflower",
+      "file": "assets/stills/the-perks-of-being-a-wallflower.webp",
+      "status": "ok",
+      "source_url": "https://image.tmdb.org/t/p/original/8d9r0Ie7S6ly55pVoEP2nyVJzYA.jpg",
+      "source_page": "https://www.themoviedb.org/movie/84892-the-perks-of-being-a-wallflower/images/backdrops",
+      "provider": "TMDB",
+      "source_size": "3840x2160",
+      "licence_note": "unknown — TMDB states images are for personal use via its API terms",
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "notes": "Iconic tunnel drive night scene; textless 4K (3840x2160), moody lighting, subject comfortably in central band"
+    },
+    {
+      "id": "the-night-is-short-walk-on-girl",
+      "kind": "films",
+      "title": "The Night is Short, Walk on Girl",
+      "file": "assets/stills/the-night-is-short-walk-on-girl.webp",
+      "status": "ok",
+      "source_url": "https://image.tmdb.org/t/p/original/3GSwu7lCjt0XTLsS7Qk0dXmvnar.jpg",
+      "source_page": "https://www.themoviedb.org/movie/430214/images/backdrops",
+      "provider": "TMDB",
+      "source_size": "3840x2160",
+      "licence_note": "unknown — TMDB states images are for personal use via its API terms",
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "notes": "Surreal vibrant Kyoto night scene; textless 4K (3840x2160) frame from Masaaki Yuasa's animated feature"
+    },
+    {
+      "id": "other-mommy",
+      "kind": "films",
+      "title": "Other Mommy",
+      "file": "assets/stills/other-mommy.webp",
+      "status": "ok",
+      "source_url": "https://image.tmdb.org/t/p/original/ncm7djsVTHQQMX2HEbEVxMUFchG.jpg",
+      "source_page": "https://www.themoviedb.org/movie/1400837-other-mommy/images/backdrops",
+      "provider": "TMDB",
+      "source_size": "3840x2160",
+      "licence_note": "unknown — TMDB states images are for personal use via its API terms",
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "notes": "Atmospheric cinematic still from Rob Savage's feature; textless 4K (3840x2160), dark moody horror palette"
+    },
+    {
+      "id": "dark-souls",
+      "kind": "games",
+      "title": "Dark Souls",
+      "file": "assets/stills/dark-souls.webp",
+      "status": "ok",
+      "source_url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/570940/ss_3a71463e4ccaf28c5c27f6cf8d32a3a125f45404.1920x1080.jpg?t=1778518110",
+      "source_page": "https://store.steampowered.com/app/570940/",
+      "provider": "Steam",
+      "source_size": "1920x1080",
+      "licence_note": "unknown — Valve Steam subscriber agreement & developer promotional media terms",
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "notes": "Anor Londo / Undead Asylum knight atmospheric shot; clean, no HUD; mid-dark palette suited for caption overlay"
+    },
+    {
+      "id": "the-elder-scrolls-v-skyrim",
+      "kind": "games",
+      "title": "The Elder Scrolls V: Skyrim",
+      "file": "assets/stills/the-elder-scrolls-v-skyrim.webp",
+      "status": "ok",
+      "source_url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/489830/ss_73c1a0bb7e1720c8a1847186c3ddd837d3ca7a8d.1920x1080.jpg?t=1786648247",
+      "source_page": "https://store.steampowered.com/app/489830/",
+      "provider": "Steam",
+      "source_size": "1920x1080",
+      "licence_note": "unknown — Valve Steam subscriber agreement & developer promotional media terms",
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "notes": "Scenic atmospheric mountain landscape view of Skyrim; clean official Steam screenshot, no HUD"
+    },
+    {
+      "id": "dark-souls-iii",
+      "kind": "games",
+      "title": "Dark Souls III",
+      "file": "assets/stills/dark-souls-iii.webp",
+      "status": "ok",
+      "source_url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/374320/ss_5efd318b85a3917d1c6e717f4cb813b47547cd6f.1920x1080.jpg?t=1748630784",
+      "source_page": "https://store.steampowered.com/app/374320/",
+      "provider": "Steam",
+      "source_size": "1920x1080",
+      "licence_note": "unknown — Valve Steam subscriber agreement & developer promotional media terms",
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "notes": "Ashen One overlooking High Wall of Lothric; iconic vista, no HUD, calm mid-dark centre"
+    },
+    {
+      "id": "kingdom-come-deliverance",
+      "kind": "games",
+      "title": "Kingdom Come: Deliverance",
+      "file": "assets/stills/kingdom-come-deliverance.webp",
+      "status": "low-res",
+      "source_url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/379430/ss_1e65496b05d2c37ed0dd7d0c31d73e34fa83533e.1920x1080.jpg?t=1770998376",
+      "source_page": "https://store.steampowered.com/app/379430/",
+      "provider": "Steam",
+      "source_size": "1920x1080",
+      "licence_note": "unknown — Valve Steam subscriber agreement & developer promotional media terms",
+      "focal": {
+        "x": 0.5,
+        "y": 0.55
+      },
+      "notes": "Atmospheric Bohemian countryside / village landscape, clean in-game capture without HUD"
+    },
+    {
+      "id": "sekiro-shadows-die-twice",
+      "kind": "games",
+      "title": "Sekiro: Shadows Die Twice",
+      "file": "assets/stills/sekiro-shadows-die-twice.webp",
+      "status": "ok",
+      "source_url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/814380/ss_0f7b0f8ed9ffc49aba26f9328caa9a1d59ad60f0.1920x1080.jpg?t=1762888662",
+      "source_page": "https://store.steampowered.com/app/814380/",
+      "provider": "Steam",
+      "source_size": "1920x1080",
+      "licence_note": "unknown — Valve Steam subscriber agreement & developer promotional media terms",
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "notes": "Wolf in Ashina landscape; dramatic framing, no HUD, balanced centre"
+    },
+    {
+      "id": "persona-5-royal",
+      "kind": "games",
+      "title": "Persona 5 Royal",
+      "file": "assets/stills/persona-5-royal.webp",
+      "status": "ok",
+      "source_url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1687950/ss_a3258aba84ae2f2ff13a02a160f7495bfc152adb.1920x1080.jpg?t=1783356822",
+      "source_page": "https://store.steampowered.com/app/1687950/",
+      "provider": "Steam",
+      "source_size": "1920x1080",
+      "licence_note": "unknown — Valve Steam subscriber agreement & developer promotional media terms",
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "notes": "Clean high-res scene capture; stylish Persona aesthetic, no battle HUD overlay"
+    },
+    {
+      "id": "valorant",
+      "kind": "games",
+      "title": "Valorant",
+      "file": "assets/stills/valorant.webp",
+      "status": "ok",
+      "source_url": "https://cmsassets.rgpub.io/sanity/files/dsfx7636/news/c88f2f43ad2af3c3f97bfda0b9e2b3ba064aa7dd.zip",
+      "source_page": "https://playvalorant.com/en-us/media/",
+      "provider": "Riot Games",
+      "source_size": "3840x2160",
+      "licence_note": "Riot Games Legal Jibber Jabber — personal, non-commercial use permitted",
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "notes": "Ascent map official environment render/still; 3840x2160 uncompressed asset, clean without HUD or text"
+    },
+    {
+      "id": "elden-ring",
+      "kind": "games",
+      "title": "Elden Ring",
+      "file": "assets/stills/elden-ring.webp",
+      "status": "ok",
+      "source_url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/ss_943bf6fe62352757d9070c1d33e50b92fe8539f1.1920x1080.jpg?t=1790290043",
+      "source_page": "https://store.steampowered.com/app/1245620/",
+      "provider": "Steam",
+      "source_size": "1920x1080",
+      "licence_note": "unknown — Valve Steam subscriber agreement & developer promotional media terms",
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "notes": "Tarnished gazing at the Erdtree across the Lands Between; iconic vista, no HUD"
+    },
+    {
+      "id": "lies-of-p",
+      "kind": "games",
+      "title": "Lies of P",
+      "file": "assets/stills/lies-of-p.webp",
+      "status": "ok",
+      "source_url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1627720/ss_cef0c2964b82e2b80ab0756da08f61c27d9fa33c.1920x1080.jpg?t=1764565054",
+      "source_page": "https://store.steampowered.com/app/1627720/",
+      "provider": "Steam",
+      "source_size": "1920x1080",
+      "licence_note": "unknown — Valve Steam subscriber agreement & developer promotional media terms",
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "notes": "Pinocchio / Krat city street gothic architecture, clean frame without HUD"
+    },
+    {
+      "id": "clair-obscur-expedition-33",
+      "kind": "games",
+      "title": "Clair Obscur: Expedition 33",
+      "file": "assets/stills/clair-obscur-expedition-33.webp",
+      "status": "ok",
+      "source_url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1903340/ss_483a27df5072beb3a4650634a764bda750fbcb82.1920x1080.jpg?t=1782830877",
+      "source_page": "https://store.steampowered.com/app/1903340/",
+      "provider": "Steam",
+      "source_size": "1920x1080",
+      "licence_note": "unknown — Valve Steam subscriber agreement & developer promotional media terms",
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "notes": "Expedition vista across fantastical landscape; clean frame, no HUD, central composition"
+    }
+  ]
+}

@@ -1,0 +1,279 @@
+/* Page layout. design-system.md §2.2–§3. */
+
+main { position: relative; height: 100%; }
+
+[data-disc-canvas] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: transparent;
+  pointer-events: none;
+}
+
+[data-disc-gallery] {
+  position: absolute;
+  inset: 0;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+}
+[data-disc-gallery]:focus-visible { outline: none; }
+[data-disc-gallery][data-disc-dragging='true'] { cursor: grabbing; }
+
+/* Film grain over everything, as on the reference: a static noise tile at 20 %,
+ * nudged on a 0.6 s step so it reads as projected rather than printed. Pure
+ * compositor work — a transform on a fixed layer, never a repaint. */
+.grain {
+  position: fixed;
+  inset: -1em;
+  z-index: 99;
+  pointer-events: none;
+  opacity: .2;
+  /* the tile is grey noise at 16 % alpha, so the page stays at #F2F2F2 on
+   * average instead of being greyed down by an opaque tile */
+  background: url('../assets/noise.png') 50% / 7.8125em;
+  will-change: transform;
+  animation: grain .6s step-end infinite;
+}
+@keyframes grain {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-.5em, .3em); }
+  40%  { transform: translate(.4em, -.2em); }
+  60%  { transform: translate(-.3em, -.4em); }
+  80%  { transform: translate(.2em, .5em); }
+}
+@media (prefers-reduced-motion: reduce) { .grain { animation: none; } }
+
+/* ── nav: one centred list, brand first ───────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  padding: var(--_layout---container--container-padding) 3em 0;
+  font-size: var(--size--18px);
+  line-height: 1;
+  pointer-events: none;
+}
+.nav__list { display: flex; align-items: center; pointer-events: auto; }
+.nav__item { position: relative; padding: .5em 1em; }
+.nav__item[hidden] { display: none; }
+
+/* Each item rolls up out of its own mask (yPercent 105 → 0). The mask is
+ * exactly one line tall — any padding inside it would show the parked item. */
+.nav__mask { display: block; overflow: hidden; }
+.nav__brand {
+  display: block;
+  font-family: var(--_font---serif);
+  font-size: 1.3em;
+  letter-spacing: -.01em;
+  text-transform: uppercase;
+}
+
+.nav-loading { display: flex; align-items: center; gap: .375em; }
+.nav-link__label { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* The spinner: a 1.5 px solid border with a transparent right edge, .65 em
+ * square. It is rotated by a GSAP tween, not a CSS animation, so it stays in
+ * lockstep with the GSAP ticker — two clocks drift. */
+.nav-loading__spinner {
+  border: 1.5px solid var(--_theme---body-text);
+  border-right-color: transparent;
+  border-radius: 50%;
+  flex: none;
+  width: .65em;
+  height: .65em;
+}
+
+.nav__switch {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  opacity: .6;
+  transition: opacity .3s cubic-bezier(.32, .72, 0, 1);
+}
+.nav__switch:hover,
+.nav__switch[aria-pressed='true'] { opacity: 1; }
+/* The active dot sits under the label and springs in (≈ back.out(1.6)). It
+ * hangs on the ITEM, outside the clipping mask, so the mask cannot cut it. */
+.nav__item--switch::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: .3em;
+  height: .3em;
+  margin-left: -.15em;
+  border-radius: 50%;
+  background: currentColor;
+  pointer-events: none;
+  transform: scale(0);
+  transition: transform .32s cubic-bezier(.34, 1.8, .64, 1);
+}
+.nav__item--switch:has([aria-pressed='true'])::after { transform: scale(1); }
+[data-preload] .nav__item--switch::after { transform: scale(0); }
+
+/* ── the copy column ──────────────────────────────────────────────────── */
+/* Top-left: title over label/value rows. Bottom-left: the position index.
+ * max-width 20.8333 % = 300 px of 1440, so the disc owns the frame. */
+.experience_info {
+  position: absolute;
+  top: var(--_layout---container--container-padding);
+  left: var(--_layout---container--container-padding);
+  bottom: var(--_layout---container--container-padding);
+  width: 20.8333%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.info-head { position: relative; display: flex; flex-direction: column; gap: .5em; }
+
+/* Legibility guard — WCAG 1.4.3. The ribbon's left-hand discs can pass behind
+ * the copy; the scrim matches the page, so it is invisible except over artwork. */
+.info-head::before {
+  content: '';
+  position: absolute;
+  inset: -2em -3em -2em -2em;
+  background: radial-gradient(ellipse at 0 0,
+    var(--_theme---background) 55%, rgba(242, 242, 242, 0) 100%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.info-title {
+  font-family: var(--_font---serif);
+  font-weight: 400;
+  font-size: var(--size--40px);
+  line-height: 1.1em;
+  letter-spacing: -.02em;
+  text-transform: uppercase;
+}
+
+.info-content { display: flex; flex-direction: column; width: 100%; }
+
+.experience_info__field {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1em;
+  padding: .25em 0;
+}
+.experience_info__field[hidden] { display: none; }
+.experience_info__field .divider-horizontal {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  width: auto;
+}
+
+.info-label {
+  padding-top: .55em;
+  font-family: var(--_font---eyebrow);
+  font-size: var(--size--8px);
+  line-height: 1.3em;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+.info-value {
+  font-size: var(--size--18px);
+  line-height: 1.4em;
+  letter-spacing: -.025em;
+  text-align: right;
+}
+/* the masks the reveal engine wraps around each target are the flex children */
+.experience_info__field > [data-disc-mask] { flex: none; }
+.experience_info__field > [data-disc-mask]:last-child { min-width: 0; flex: 0 1 auto; }
+[data-film-field='secondary'] > [data-disc-mask]:last-child { max-width: 62%; }
+
+/* Bottom-left: where you are on the shelf. */
+.info-index {
+  display: flex;
+  align-items: baseline;
+  gap: .75em;
+}
+.info-index__label {
+  font-family: var(--_font---eyebrow);
+  font-size: var(--size--8px);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+.info-index__count {
+  font-family: var(--_font---serif);
+  font-size: var(--size--28px);
+  line-height: 1.1em;
+  letter-spacing: -.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The mask contract lives in tokens.css, next to the loader gate. */
+
+/* ── bottom centre: the curator's rating + note ─────────────────────────
+ * The reference's review block, carrying the curator's own rating instead of a
+ * critic's. Stars, a tracked-caps source line, then the note set like the
+ * reference's pull quote: serif, uppercase, centred, balanced over two lines. */
+.testimonial_wrap {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 2.5em;
+  pointer-events: none;
+}
+.testimonial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.625em;
+  width: 25.4em;
+  text-align: center;
+}
+.testimonial[hidden] { display: none; }
+.testimonial__text { display: flex; flex-direction: column; gap: .325em; }
+
+/* One element, masked by a repeating star: its WIDTH is the rating, so a half
+ * star is simply half a cell. `--value` is set by the copy engine (in em). */
+.testimonial__stars {
+  display: block;
+  width: calc(var(--value, 0) * 1em);
+  height: 1em;
+  margin: 0 auto;
+  background: currentColor;
+  --star: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 16'%3E%3Cpath d='M8 0l2.35 4.95 5.25.7-3.85 3.7.95 5.35L8 12.15 3.3 14.7l.95-5.35L.4 5.65l5.25-.7z'/%3E%3C/svg%3E");
+  -webkit-mask: var(--star) left center / 1.125em 1em repeat-x;
+          mask: var(--star) left center / 1.125em 1em repeat-x;
+}
+.testimonial__source {
+  font-family: var(--_font---eyebrow);
+  font-size: var(--size--8px);
+  line-height: 1.3em;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+.testimonial__quote {
+  font-family: var(--_font---serif);
+  font-size: var(--size--28px);
+  line-height: 1.1em;
+  letter-spacing: -.02em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+@media (max-width: 991px) {
+  .experience_info { width: 50%; }
+  .testimonial_wrap { padding-bottom: 6em; }
+}
+/* Phones: the copy spans the top, the nav docks at the bottom (as the
+ * reference does), and the index sits just above it. */
+@media (max-width: 767px) {
+  .experience_info { width: auto; right: var(--_layout---container--container-padding); bottom: 4.5em; }
+  .testimonial_wrap { display: none; }
+  .nav { top: auto; bottom: 0; padding: 0 1.25em var(--_layout---container--container-padding); }
+  .info-title { font-size: 1.5em; }
+}

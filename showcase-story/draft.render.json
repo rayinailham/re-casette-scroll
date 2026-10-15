@@ -1,0 +1,25 @@
+{
+ "comp": "/home/rayin/Projects/RE:casette-scroll/showcase-story/comp.html",
+ "fps": 30,
+ "scale": 1,
+ "size": [
+  1080,
+  1920
+ ],
+ "shutter": 180.0,
+ "samples": "adaptive",
+ "gap_px": 30.0,
+ "samples_per_moving_frame": {
+  "4": 356,
+  "6": 2,
+  "8": 2,
+  "15": 2
+ },
+ "workers": 3,
+ "frames": 420,
+ "still_frames": 58,
+ "cut_frames": 23,
+ "captures": 1598,
+ "seconds": 89.4,
+ "final": false
+}

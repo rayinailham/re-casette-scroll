@@ -1,0 +1,143 @@
+{
+  "curator": "Rayina Ilham",
+  "generated_by": "tools/fetch-covers.py",
+  "disc_texture": {
+    "size": 1024,
+    "hub_radius_px": 122.88,
+    "base_colour": "#0c0c0e"
+  },
+  "note": "Third-party cover art for personal, non-commercial use. Do not redistribute.",
+  "count": 10,
+  "covers": [
+    {
+      "id": "good-will-hunting",
+      "kind": "films",
+      "title": "Good Will Hunting",
+      "year": 1997,
+      "fit": "crop",
+      "anchor": 0.6,
+      "provider": "local",
+      "source": "assets/covers/incoming/good-will-hunting.jpg",
+      "source_size": "1947x2970",
+      "size": "1024x1024",
+      "path": "assets/covers/good-will-hunting.webp"
+    },
+    {
+      "id": "the-perks-of-being-a-wallflower",
+      "kind": "films",
+      "title": "The Perks of Being a Wallflower",
+      "year": 2012,
+      "fit": "crop",
+      "anchor": 1.0,
+      "provider": "local",
+      "source": "assets/covers/incoming/the-perks-of-being-a-wallflower.jpg",
+      "source_size": "1386x2048",
+      "size": "1024x1024",
+      "path": "assets/covers/the-perks-of-being-a-wallflower.webp"
+    },
+    {
+      "id": "chungking-express",
+      "kind": "films",
+      "title": "Chungking Express",
+      "year": 1994,
+      "fit": "crop",
+      "anchor": 0.4,
+      "provider": "local",
+      "source": "assets/covers/incoming/chungking-express.jpg",
+      "source_size": "1956x2948",
+      "size": "1024x1024",
+      "path": "assets/covers/chungking-express.webp"
+    },
+    {
+      "id": "resident-evil",
+      "kind": "films",
+      "title": "Resident Evil",
+      "year": 2002,
+      "fit": "crop",
+      "anchor": 0.7,
+      "provider": "local",
+      "source": "assets/covers/incoming/resident-evil.jpg",
+      "source_size": "2024x3000",
+      "size": "1024x1024",
+      "path": "assets/covers/resident-evil.webp"
+    },
+    {
+      "id": "dead-poets-society",
+      "kind": "films",
+      "title": "Dead Poets Society",
+      "year": 1989,
+      "fit": "crop",
+      "anchor": 0.3,
+      "provider": "local",
+      "source": "assets/covers/incoming/dead-poets-society.jpg",
+      "source_size": "2009x2964",
+      "size": "1024x1024",
+      "path": "assets/covers/dead-poets-society.webp"
+    },
+    {
+      "id": "other-mommy",
+      "kind": "films",
+      "title": "Other Mommy",
+      "year": 2026,
+      "fit": "crop",
+      "anchor": 0.8,
+      "provider": "local",
+      "source": "assets/covers/incoming/other-mommy.jpg",
+      "source_size": "1895x3000",
+      "size": "1024x1024",
+      "path": "assets/covers/other-mommy.webp"
+    },
+    {
+      "id": "the-truman-show",
+      "kind": "films",
+      "title": "The Truman Show",
+      "year": 1998,
+      "fit": "crop",
+      "anchor": 1.0,
+      "provider": "local",
+      "source": "assets/covers/incoming/the-truman-show.jpg",
+      "source_size": "1994x2955",
+      "size": "1024x1024",
+      "path": "assets/covers/the-truman-show.webp"
+    },
+    {
+      "id": "breakfast-at-tiffanys",
+      "kind": "films",
+      "title": "Breakfast at Tiffany's",
+      "year": 1961,
+      "fit": "crop",
+      "anchor": 0.5,
+      "provider": "local",
+      "source": "assets/covers/incoming/breakfast-at-tiffanys.jpg",
+      "source_size": "1904x2938",
+      "size": "1024x1024",
+      "path": "assets/covers/breakfast-at-tiffanys.webp"
+    },
+    {
+      "id": "12-angry-men",
+      "kind": "films",
+      "title": "12 Angry Men",
+      "year": 1957,
+      "fit": "crop",
+      "anchor": 0.5,
+      "provider": "local",
+      "source": "assets/covers/incoming/12-angry-men.jpg",
+      "source_size": "1902x2907",
+      "size": "1024x1024",
+      "path": "assets/covers/12-angry-men.webp"
+    },
+    {
+      "id": "the-night-is-short-walk-on-girl",
+      "kind": "films",
+      "title": "The Night is Short, Walk on Girl",
+      "year": 2017,
+      "fit": "crop",
+      "anchor": 0.5,
+      "provider": "local",
+      "source": "assets/covers/incoming/the-night-is-short-walk-on-girl.jpg",
+      "source_size": "1097x1604",
+      "size": "1024x1024",
+      "path": "assets/covers/the-night-is-short-walk-on-girl.webp"
+    }
+  ]
+}

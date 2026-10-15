@@ -1,0 +1,252 @@
+/* The detail view. design-system.md §4.8. Same tokens and faces as the shelf —
+ * nothing new is declared here. `html[data-view]` is set by src/main.js. */
+
+/* ── view switching ───────────────────────────────────────────────────────
+ * The shelf page never scrolls (html is overflow:hidden). While a detail is
+ * open the DOCUMENT scrolls instead, and the shelf's own layers are pinned
+ * behind it, untouched and parked. */
+html[data-view='detail'] { height: auto; overflow-x: hidden; overflow-y: auto; }
+html[data-view='detail'] body { height: auto; min-height: 100%; }
+html[data-view='detail'] main,
+html[data-view='detail'] [data-disc-canvas] { position: fixed; inset: 0; height: 100%; }
+/* once the detail is opaque nothing under it needs painting */
+html[data-view='detail'][data-covered] main,
+html[data-view='detail'][data-covered] [data-disc-canvas] { visibility: hidden; }
+/* the nav stays: Films / Games are the way back to a shelf. On phones it docks at
+ * the bottom of the screen, where it would sit on the page, so it leaves there. */
+@media (max-width: 767px) {
+  html[data-view='detail'] .nav__item--switch { visibility: hidden; }
+}
+/* while the disc is still leaving it stays above the page that fades in (§11.6, z-index 60) */
+html[data-exiting] [data-disc-canvas] { z-index: 60; }
+
+/* under the loader a deep link stays dark, then comes up with the page */
+/* a deep link opens under the loader: dark until the loader lifts, then it fades up */
+[data-preload] .detail { visibility: hidden !important; }
+.detail[data-instant] { animation: detail-in .35s cubic-bezier(.32, .72, 0, 1) both; }
+[data-preload] .detail[data-instant] { animation: none; opacity: 0; }
+@keyframes detail-in { from { opacity: 0; } to { opacity: 1; } }
+
+.detail {
+  position: relative;
+  z-index: 10;
+  background: var(--_theme---background);
+}
+.detail[hidden] { display: none; }
+
+/* the nav and Back follow the ink: light type once the edge has uncovered the still */
+html[data-ink-dark] .nav,
+html[data-ink-dark] .detail__back { color: #fff; }
+
+/* ── back ─────────────────────────────────────────────────────────────── */
+.detail__back {
+  position: fixed;
+  z-index: 101;
+  top: var(--_layout---container--container-padding);
+  left: var(--_layout---container--container-padding);
+  padding: .5em 1em;
+  font-size: var(--size--18px);
+  line-height: 1;
+  cursor: pointer;
+  opacity: .6;
+  transition: opacity .3s cubic-bezier(.32, .72, 0, 1);
+}
+.detail__back:hover, .detail__back:focus-visible { opacity: 1; }
+.detail__back::before { content: '\2190'; margin-right: .5em; }
+
+/* ── hero ─────────────────────────────────────────────────────────────── */
+.detail-hero {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6em 2em;
+  background: var(--_theme---background);
+}
+.detail-hero__sheet {
+  width: min(100%, 52em);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2.5em;
+}
+.detail-title {
+  font-family: var(--_font---serif);
+  font-weight: 400;
+  font-size: var(--size--96px);
+  line-height: 1;
+  letter-spacing: -.03em;
+  text-align: center;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+.detail-title:focus { outline: none; }
+.detail-hero__rule { width: 100%; }
+
+.detail-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--_layout---grid--gap); align-items: start; }
+.detail-col { display: flex; flex-direction: column; }
+.detail-row {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1em;
+  padding: .25em 0;
+}
+.detail-row[hidden] { display: none; }
+.detail-row .divider-horizontal { position: absolute; top: 0; left: 0; right: 0; width: auto; }
+.detail-row .info-value { min-width: 0; }
+
+/* four corner marks: a plus is two hairlines */
+.detail-plus { position: absolute; width: 1em; height: 1em; pointer-events: none; }
+.detail-plus::before, .detail-plus::after {
+  content: ''; position: absolute; background: var(--_theme---body-text);
+}
+.detail-plus::before { left: 0; right: 0; top: 50%; height: .5px; }
+.detail-plus::after { top: 0; bottom: 0; left: 50%; width: .5px; }
+.detail-plus--tl { top: 4.5em; left: 1.5em; }
+.detail-plus--tr { top: 4.5em; right: 1.5em; }
+.detail-plus--bl { bottom: 1.5em; left: 1.5em; }
+.detail-plus--br { bottom: 1.5em; right: 1.5em; }
+
+/* ── still ────────────────────────────────────────────────────────────── */
+.detail-still {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background: #0c0c0e;
+  color: #fff;
+}
+.detail-still[hidden] { display: none; }
+.detail-still__bleed { position: absolute; inset: 0; overflow: hidden; }
+.detail-still__bleed img {
+  position: absolute;
+  left: 0; width: 100%;
+  top: calc(var(--dissolve-bleed, 0px) * -1);
+  height: calc(100% + var(--dissolve-bleed, 0px) * 2);
+  object-fit: cover;
+  will-change: transform;
+}
+/* a plain scrim, so the quote clears 4.5:1 on any frame (WCAG 1.4.3) */
+.detail-still::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(rgba(0, 0, 0, .34), rgba(0, 0, 0, .34));
+}
+.detail-still__quote {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2em;
+  text-align: center;
+  font-family: var(--_font---serif);
+  font-size: var(--size--56px);
+  line-height: 1.05em;
+  letter-spacing: -.02em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+.detail-still[data-has-quote='false'] .detail-still__quote { display: none; }
+
+/* ink on: hero and still share one pinned stage while the edge eats the hero.
+ * Both are sticky and the still is pulled under the hero by `--dissolve-overlap`;
+ * the track is the stage plus the scroll runway. Off (reduced motion, no
+ * path() clip-path, no still) the hero is a plain section above the still. */
+.detail-ink[data-ink='on'] {
+  min-height: calc(var(--dissolve-overlap) * 2 + var(--dissolve-apron));
+}
+.detail-ink[data-ink='on'] > .detail-hero,
+.detail-ink[data-ink='on'] > .detail-still {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+}
+.detail-ink[data-ink='on'] > .detail-still { margin-top: calc(var(--dissolve-overlap) * -1); }
+
+/* ── note ─────────────────────────────────────────────────────────────── */
+.detail-note {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.625em;
+  padding: 10em 2em;
+  text-align: center;
+}
+.detail-note[hidden] { display: none; }
+.detail-note .testimonial__quote { max-width: 25.4em; }
+
+/* ── next ───────────────────────────────────────────────────────────────
+ * The reference's `.scroll-to` section, measured on the live page (round 4):
+ * a warm grey slab 124 vh tall, five rows of 1/5 with a hairline through the
+ * middle of each; the next title is set on rules 3 → 5 in 72 px serif, every
+ * line off-centre; the disc lives in the LOWER HALF (its own canvas) and shows
+ * only a cap of itself. The link is the label: reduced motion's whole path. */
+.detail-next {
+  position: relative;
+  height: 124vh;
+  height: 124svh;
+  /* `clip`, not `hidden`: hidden makes this a scroll container */
+  overflow: clip;
+  background: #d6d3d1;
+}
+.detail-next__rules { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.detail-next__rules .divider-horizontal { position: absolute; left: .5em; right: .5em; width: auto; }
+.detail-next__rules .divider-horizontal:nth-child(1) { top: 10%; }
+.detail-next__rules .divider-horizontal:nth-child(2) { top: 30%; }
+.detail-next__rules .divider-horizontal:nth-child(3) { top: 50%; }
+.detail-next__rules .divider-horizontal:nth-child(4) { top: 70%; }
+.detail-next__rules .divider-horizontal:nth-child(5) { top: 90%; }
+.detail-next__canvas { position: absolute; left: 0; right: 0; top: 50%; bottom: 0; z-index: 2; pointer-events: none; }
+.detail-next__canvas canvas { display: block; width: 100%; height: 100%; }
+.detail-next__link {
+  position: absolute; inset: 0;
+  z-index: 3;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;                /* the whole slab leads on; the disc's own hit test (JS) also does */
+}
+.detail-next__link:focus-visible { outline: 1px solid currentColor; outline-offset: -1px; }
+.detail-next__kicker {
+  position: absolute;
+  left: 2em;
+  bottom: calc(70% + .5em);       /* on rule 2 */
+  font-family: var(--_font---eyebrow);
+  font-size: var(--size--8px);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+.detail-next__title { display: block; font-size: 6em; }
+.detail-next__line {
+  position: absolute;
+  left: var(--dx, 0); right: calc(var(--dx, 0px) * -1);
+  /* sat on rule --r (1-based): rule k is at (k − 1) · 20 % + 10 % of the section */
+  bottom: calc(100% - ((var(--r, 3) - 1) * 20% + 10%) + .06em);
+  overflow: hidden;
+  padding-top: .12em;
+  text-align: center;
+}
+.detail-next__word {
+  display: inline-block;
+  font-family: var(--_font---serif);
+  line-height: 1;
+  letter-spacing: -.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .detail-hero { padding: 6em 1em; }
+  .detail-cols { grid-template-columns: 1fr; }
+  .detail-title { font-size: 2.75em; }
+  .detail-still__quote { font-size: 1.75em; }
+  .detail-next__title { font-size: 3.5em; }
+}
+@media (prefers-reduced-motion: reduce) { .detail__back { transition: none; } }
